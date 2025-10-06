@@ -1,0 +1,627 @@
+/* --- Reset and Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    /* Keep Poppins as fallback */
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.4em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border: none;
+    border: radius 10px;
+    background: #473a2f;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: #1772c3;
+    border-radius: 0.3em;
+    transition: all 1s ease;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #3ac67d;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url("/assets/text-bg.png") no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Info Stats Section --- */
+.info {
+    background: rgba(0, 0, 0, 0.55);
+    border: 2px solid gold;
+    border-radius: 15px;
+    padding: 18px 25px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+    color: #FFD700;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 2px 6px rgba(255, 255, 255, 0.1);
+}
+
+.info-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+.info-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.info-stats p {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    color: #FFD700;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+}
+
+.info-stats span {
+    color: #fff;
+    font-weight: 700;
+}
+
+
+/* --- Level Map Container --- */
+.level-map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+    width: 100%;
+    margin-top: 80px;
+}
+
+.map-title {
+    font-family: 'Epunda Slab', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.map-subtitle {
+    font-size: 1.1rem;
+    color: #f5f5f5;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* --- Path Wrapper (Responsive Adjustments) --- */
+.level-path-wrapper {
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    padding: 6px 0em;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* --- SVG Connector --- */
+.level-path-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- Zigzag Path --- */
+.level-path {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 40px;
+    padding: 0 10px;
+    z-index: 1;
+}
+
+/* --- Level Node --- */
+.level-node {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at top left, #60A5FA, #2563EB);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #FFD700;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4),
+        inset -4px -4px 10px rgba(0, 0, 0, 0.3),
+        inset 4px 4px 10px rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    user-select: none;
+}
+
+/* Glossy shine */
+.level-node::after {
+    content: '';
+    position: absolute;
+    top: -25%;
+    left: -25%;
+    width: 150%;
+    height: 60%;
+    background: rgba(255, 255, 255, 0.35);
+    transform: rotate(-25deg);
+    border-radius: 50%;
+}
+
+/* Hover effect */
+.level-node.unlocked:hover {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Locked node */
+.level-node.locked {
+    background: radial-gradient(circle at top left, #A0AEC0, #4A5568);
+    border-color: #718096;
+    filter: grayscale(70%) brightness(0.8);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Level text & buttons */
+.level-number {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.level-status {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #FFD700;
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.level-node .play-button {
+    margin-top: 8px;
+    background: linear-gradient(to bottom, #FFD700, #F59E0B);
+    color: #1E40AF;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 2px solid #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.level-node .play-button:hover {
+    background: linear-gradient(to bottom, #FBBF24, #FFD700);
+    transform: scale(1.1);
+}
+
+.level-node .lock-icon {
+    font-size: 1.6rem;
+    color: #E2E8F0;
+    margin-top: 5px;
+}
+
+/* Zigzag alignment */
+.level-path {
+    padding: 0 20%;
+}
+
+.level-node:nth-child(odd) {
+    align-self: flex-start;
+    transform: translateX(-50%);
+}
+
+.level-node:nth-child(even) {
+    align-self: flex-end;
+    transform: translateX(50%);
+}
+
+/* --- Quiz Overlay --- */
+.quiz-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(39, 40, 42, 0.799);
+    /* Darker, more atmospheric overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    transition: opacity 0.3s;
+}
+
+/* Quiz Card - Styled for Adventure Theme */
+.quiz-card {
+    /* Retaining original background image path */
+    background-image: url("/assets/card-background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 26px;
+    /* Slightly more rounded */
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        /* Deeper shadow for card lift */
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        inset 0 4px 10px rgba(255, 255, 255, 0.15);
+    /* Subtle inner light for depth */
+
+    /* ADJUSTMENT: Increased Card Width (Looks like 600-650px in the image) */
+    padding: 45px 35px 35px 35px;
+    /* More generous padding */
+    min-width: 300px;
+    max-width: 95vw;
+    width: 650px;
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    animation: cardIn 0.5s cubic-bezier(.68, -0.55, .27, 1.55);
+    border: 3px solid #6C5B7B;
+    /* A more earthy/mystical border color for the card */
+    overflow: hidden;
+}
+
+@keyframes cardIn {
+    0% {
+        transform: scale(0.7) rotate(-8deg);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.05) rotate(2deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.quiz-progress {
+    font-size: 1.15rem;
+    /* ADJUSTMENT: Text color to match the golden/orange in the image */
+    color: #F8B400;
+    /* Darker Gold/Orange */
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    /* ADJUSTMENT: Stronger text shadow for the bright yellow text */
+    text-shadow: 0 0 5px rgb(107 107 74 / 80%), 0 0 10px rgba(255, 165, 0, 0.6);
+    z-index: 1;
+}
+
+.quiz-question {
+    font-size: 1.8rem;
+    /* Large and prominent */
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 10px;
+    /* 🎨 Color & Effect to Match Image */
+    color: #ffffff;
+    /* Dark gray/near black */
+    text-shadow:
+        1px 1px 2px rgba(255, 255, 255, 0.7),
+        /* White shadow/outline for contrast */
+        -1px -1px 1px rgba(0, 0, 0, 0.1);
+    /* Subtle dark drop shadow */
+
+    z-index: 1;
+}
+
+.quiz-options {
+    /* Already displays in two columns as requested */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 25px;
+    /* Increased gap */
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    z-index: 1;
+    /* ADJUSTMENT: Max width to keep option buttons centralized in the wider card */
+    max-width: 500px;
+}
+
+.quiz-option-button {
+    /* Existing background image properties are good */
+    background-image: url('/assets/option-bg.png');
+    /* This is your Ghibli stone panel */
+    background-size: 150%;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    border: 3px solid #8B4513;
+    /* Earthy brown border for the stone panel */
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 1.15rem;
+    font-weight: 700;
+
+    /* ADJUSTMENT: Option Text color to dark brown/black */
+    color: #333333;
+
+    /* ADJUSTMENT: Clearer shadow/emboss effect for text on stone */
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition:
+        border 0.2s,
+        background-size 0.3s,
+        color 0.2s,
+        transform 0.15s,
+        box-shadow 0.2s;
+    outline: none;
+    width: 100%;
+    max-width: 200px;
+    /* Option button width */
+    text-align: center;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.quiz-option-button:hover:not(:disabled) {
+    background-position: center center;
+    color: #000;
+    /* Darker text on hover */
+    border-color: #DAA520;
+    /* Gold border on hover */
+    transform: translateY(-3px) scale(1.02);
+    /* Lift and slight scale */
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+.quiz-option-button:active:not(:disabled) {
+    transform: translateY(1px) scale(0.99);
+    /* Press down effect */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.quiz-option-button:disabled {
+    opacity: 0.7;
+    cursor: default;
+    filter: grayscale(40%);
+}
+
+/* Green and Red Borders for Feedback */
+.quiz-option-button.correct {
+    border: 3px solid #3CB371 !important;
+    /* Medium Sea Green */
+    filter: hue-rotate(90deg) saturate(1.5) brightness(1.1);
+    /* Green tint effect */
+    color: #006400 !important;
+    /* Dark Green text */
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.quiz-option-button.wrong {
+    border: 3px solid #DC143C !important;
+    /* Crimson Red */
+    filter: hue-rotate(-20deg) saturate(1.8) brightness(1.1);
+    /* Red tint effect */
+    color: #8B0000 !important;
+    /* Dark Red text */
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+
+.quiz-controls {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    z-index: 1;
+}
+
+.quiz-controls button {
+    /* ADJUSTMENT: Control button colors match image */
+    background: linear-gradient(180deg, #FFC700, #FFA500);
+    /* Orange/Yellow gradient for controls */
+    color: #4A3C2B;
+    /* Dark earthy brown text */
+    border: none;
+    border-radius: 22px;
+    padding: 12px 28px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 0 0 #8B4513;
+    /* Earthy brown 'pushed' shadow */
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.1s, box-shadow 0.1s;
+}
+
+.quiz-controls button:hover:not(:disabled) {
+    background: linear-gradient(180deg, #FFD700, #FBBF24);
+    /* Lighter gold on hover */
+    color: #1E40AF;
+    /* Dark blue text on hover for contrast */
+    transform: translateY(-1px);
+    box-shadow: 0 5px 0 0 #8B4513;
+}
+
+.quiz-controls button:active:not(:disabled) {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 0 #8B4513;
+}
+
+.quiz-controls button:disabled {
+    background: #A0AEC0;
+    box-shadow: 0 4px 0 0 #718096;
+    cursor: default;
+    color: #4A5568;
+}
+
+.quizTimer {
+    font-weight: bold;
+    margin-top: 10px;
+    
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 650px) {
+
+    /* FIX: Reduce card width slightly for smaller screens before going full mobile */
+    .quiz-card {
+        width: 90vw;
+    }
+
+    .quiz-options {
+        /* Allow options to be wider to fill the space better */
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    .quiz-options {
+        /* Options go to a single column on small screens */
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .quiz-option-button {
+        max-width: 90vw;
+        height: 60px;
+        padding: 14px 18px;
+        font-size: 1rem;
+    }
+
+    .quiz-card {
+        padding: 30px 20px 25px 20px;
+    }
+
+    .quiz-question {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .quizControls {
+        gap: 15px;
+    }
+
+    .quizControls button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet & Smaller Desktop Adjustments */
+@media (max-width: 1024px) {
+    .level-path-wrapper {
+        max-width: 500px;
+    }
+}
+
+/* Mobile Adjustments (Horizontal space is precious) */
+@media (max-width: 768px) {
+    .map-title {
+        font-size: 2.5rem;
+    }
+
+    .map-subtitle {
+        font-size: 1rem;
+    }
+
+    .level-path-wrapper {
+        width: 95%;
+        max-width: 400px;
+    }
+
+    .level-path {
+        padding: 0 15%;
+        gap: 30px;
+    }
+
+    .level-node {
+        width: 85px;
+        height: 85px;
+        border-width: 4px;
+    }
+
+    .level-number {
+        font-size: 1.4rem;
+    }
+
+    .level-node .play-button {
+        font-size: 0.8rem;
+        padding: 5px 12px;
+    }
+}
+
+/* Very Small Mobile Adjustments */
+@media (max-width: 480px) {
+    .map-title {
+        font-size: 2rem;
+    }
+
+    .level-path-wrapper {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .level-node {
+        width: 70px;
+        height: 70px;
+    }
+
+    .level-number {
+        font-size: 1.2rem;
+    }
+
+    .level-status {
+        font-size: 0.8rem;
+    }
+
+    .level-path {
+        padding: 0 10%;
+    }
+}

@@ -1,0 +1,24 @@
+<nav class="navbar">
+  <!-- Logo / Brand -->
+   <div class="flex-container">
+     <a href="/" class="logo line">🏝️🏝️ Quiz Adventure 🏝️🏝️</a>
+   </div>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links">
+    <li>
+      <a href="/" class="line <%= activePage === 'home' ? 'active' : '' %>">Home</a>
+    </li>
+    <li>
+      <a href="/play" class="line <%= activePage === 'play' ? 'active' : '' %>">Play</a>
+    </li>
+    <li>
+      <a href="/profile" class="line <%= activePage === 'profile' ? 'active' : '' %>">Profile</a>
+    </li>
+    <% if (showFullNav) { %>
+      <li><a href="/about" class="line <%= activePage === 'about' ? 'active' : '' %>">About Us</a></li>
+      <li><a href="/leaderboard" class="line <%= activePage === 'leaderboard' ? 'active' : '' %>">Leaderboard</a></li>
+      <li><a href="/help" class="line <%= activePage === 'help' ? 'active' : '' %>">Help</a></li>
+    <% } %>
+  </ul>
+</nav>

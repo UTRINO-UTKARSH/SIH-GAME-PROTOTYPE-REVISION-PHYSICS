@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="home1.css">
+    <link rel="stylesheet" href="profile.css">
+     <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+</head>
+<body>
+   <nav class="navbar">
+  <!-- Logo / Brand -->
+   <div class="flex-container">
+     <a href="/" class="logo line">🏝️🏝️ Quiz Adventure 🏝️🏝️</a>
+   </div>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links">
+    <li>
+      <a href="/" class="line <%= activePage === 'home' ? 'active' : '' %>">Home</a>
+    </li>
+    <li>
+      <a href="/play" class="line <%= activePage === 'play' ? 'active' : '' %>">Play</a>
+    </li>
+    <li>
+      <a href="/profile" class="line <%= activePage === 'profile' ? 'active' : '' %>">Profile</a>
+    </li>
+  </ul>
+</nav>
+<section class="profile-avatar">
+    <div class="avatar-container">
+        <div class="avatar">
+            <img src="assets/profile-avatar.png" alt="User Avatar" class="avatar">
+            <span class="status">👋Hello <%= user %></span>
+        </div>
+</section>
+<section class="stats">
+    <div class="stats-container">
+        <h2 class="line">Your Stats</h2>
+        <p>Total Quizzes Played:</p>
+        <p>Total Correct Answers:</p>
+        <p>Total Incorrect Answers: </p>
+        <p>Average Score: </p>
+    </div>
+</section>
+</body>
+</html>

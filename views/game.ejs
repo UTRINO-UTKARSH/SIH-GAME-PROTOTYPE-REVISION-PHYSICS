@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Adventure - Levels</title>
+     <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/home1.css">
+    <link rel="stylesheet" href="/game.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+<div class="info">
+  <h3 class="info-title">Your Quiz Stats</h3>
+  <div class="info-stats">
+    <p><strong>Attempted:</strong> <span id="statAttempted">0</span></p>
+    <p><strong>Correct:</strong> <span id="statCorrect">0</span></p>
+    <p><strong>Wrong:</strong> <span id="statWrong">0</span></p>
+    <p><strong>Accuracy:</strong> <span id="statAccuracy">0%</span></p>
+    <p><strong>Total Score:</strong> <span id="statScore">0</span></p>
+  </div>
+</div>
+
+    <div class="level-map-container">
+        <h1 class="map-title">Start Your Journey, <%= user %>!</h1>
+        <p class="map-subtitle">Scroll to explore the paths ahead...</p>
+
+        <div class="level-path-wrapper">
+            <svg class="level-path-svg">
+                <path id="connector" stroke="gold" stroke-width="4" fill="none" stroke-dasharray="8 8"/>
+            </svg>
+
+            <div class="level-path">
+                <% levels.forEach((level, index) => { %>
+                    <div class="level-node <%= level.unlocked ? 'unlocked' : 'locked' %>" 
+                            data-level-id="<%= level.id %>" data-level-index="<%= index %>">
+                        <div class="level-number"><%= level.number %></div>
+                        <% if (level.unlocked) { %>
+                            <div class="level-status">
+                                <span class="material-icons">star</span>
+                                <%= level.score %>
+                            </div>
+                            <button class="play-button">Play</button>
+                        <% } else { %>
+                            <div class="level-status">Locked</div>
+                            <button class="lock-icon" disabled>🔒</button>
+                        <% } %>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <div class="quiz-overlay" id="quizOverlay" style="display: none;">
+  <div class="quiz-card" id="quizCard">
+    <div id="quizProgress" class="quiz-progress"></div>
+    <div id="quizQuestion" class="quiz-question"></div>
+    <div id="quizOptions" class="quiz-options"></div>
+
+    <div id="quizTimer" style="color: rgb(133, 245, 5);">
+      Time Left: 15s
+    </div>
+
+    <div class="quiz-controls">
+      <button id="skipButton">Skip</button>
+      <button id="nextButton">Next</button>
+    </div>
+  </div>
+</div>
+
+    <script src="/game.js"></script>
+    <script>
+        // Dynamically draw curvy dotted line connecting nodes
+        function drawConnector() {
+            const path = document.getElementById('connector');
+            const nodes = document.querySelectorAll('.level-node');
+
+            if (nodes.length > 1) {
+                let d = '';
+                nodes.forEach((node, index) => {
+                    const rect = node.getBoundingClientRect();
+                    const parentRect = node.parentElement.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2 - parentRect.left;
+                    const y = rect.top + rect.height / 2 - parentRect.top;
+
+                    if (index === 0) {
+                        d += `M${x},${y}`;
+                    } else {
+                        const prevRect = nodes[index - 1].getBoundingClientRect();
+                        const prevX = prevRect.left + prevRect.width / 2 - parentRect.left;
+                        const prevY = prevRect.top + prevRect.height / 2 - parentRect.top;
+                        const midX = (prevX + x) / 2;
+                        d += ` Q${midX},${prevY} ${x},${y}`;
+                    }
+                });
+                path.setAttribute('d', d);
+            }
+        }
+
+        window.addEventListener('load', drawConnector);
+        window.addEventListener('resize', drawConnector);
+
+        // Open quiz overlay on clicking a level
+        document.querySelectorAll('.level-node.unlocked .play-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const parentNode = button.closest('.level-node');
+                const levelIndex = parentNode.getAttribute('data-level-index');
+                // The actual quiz opening logic is correctly handled in game.js DOMContentLoaded listener.
+            });
+        });
+    </script>
+</body>
+</html>

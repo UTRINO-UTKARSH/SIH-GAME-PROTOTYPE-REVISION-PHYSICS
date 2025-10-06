@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/home1.css">
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <title>
+        <%=subject%>-World
+    </title>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+
+            <section class="enter">
+                <div class="container">
+                    <h3 class="welcome text-box">Welcome to the World of <%=subject %>- Let's Explore Motion
+                            Together!<br> Scroll to view more</h3>
+                </div>
+            </section>
+            <section id="rules" class="fade-in-scale">
+                <div class="container">
+                    <h3 class=" welcome text-box2">Quiz Rules</h3>
+                    <ul>
+                        <li>1. Each quiz consists of 10 questions.</li>
+                        <li>2. You have 15 seconds to answer each question.</li>
+                        <li>3. Each correct answer awards you 10 points.</li>
+                        <li>4. No negative marking for wrong answers.</li>
+                        <li>5. Try to answer as quickly as possible to maximize your score!</li>
+                    </ul>
+
+                    <button class="btn" id="startQuiz" type="button">Start Quiz
+                    </button>
+                </div>
+            </section>
+            <script src="/main.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                // 1. Select the elements to observe (or just one element)
+                const elements = document.querySelectorAll('.fade-in-scale');
+
+                // 2. Set options for the observer (when should the callback fire?)
+                const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                // Fire the callback when 10% of the element is visible
+                threshold: 0.1
+                };
+
+                // 3. Define the observer callback function
+                const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                // When the element is in view, add the 'is-visible' class
+                entry.target.classList.add('is-visible');
+
+                // Optional: Stop observing the element once it has appeared
+                observer.unobserve(entry.target);
+                }
+                });
+                };
+
+                // 4. Create the observer instance
+                const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+                // 5. Start observing the elements
+                elements.forEach(element => {
+                observer.observe(element);
+                });
+            });
+        </script>
+</body>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home1.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <title>Welcome <%= user %></title>
+</head>
+<body>
+<%- include('partials/navbar') %> 
+<section class="enter">
+    <div class="container">
+        <h3 class="welcome text-box">Welcome <%=user%> - It's Your Moment of Magic </h3>
+        <button class="btn" id="en" type="button"><a style="text-decoration: none;color: #ffff;" >Enter The Game</a>
+        </button>
+    </div>
+</section>
+
+</body>
+<script src="app.js"></script>
+<script src="/main.js"></script>
+</html>

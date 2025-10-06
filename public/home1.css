@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Epunda+Slab:ital,wght@0,300..900;1,300..900&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Orbitron:wght@400..900&family=Playpen+Sans:wght@100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Preahvihear&family=Quicksand:wght@300..700&family=Roboto+Slab:wght@100..900&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255, 255, 255, 0.121);
+  z-index: -1;
+}
+body{
+  background-color: #F0F4F8;
+  font-family: 'Epunda Slab';
+  background-image: url("assets/text-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Playpen Sans', cursive;
+}
+.flex-container{
+  display:flex;
+  flex-wrap: wrap-reverse ;
+}
+.line{
+  position: relative;
+  transition: all 0.3s ease-in;
+}
+.line:hover{
+  transform: scale(1.1);
+}
+.line::after{
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: #04f924;
+  transition: width 0.4s ease;
+}
+.line:hover::after {
+  width: 100%;
+}
+/* 1. Base Navbar Styling */
+.navbar {
+  background-color: #2563EB;
+  border-bottom: 4px solid #0cf46dab;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 2. Brand / Logo */
+.navbar .logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 3. Links container - No major change needed here */
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li{
+  transition: transform 0.3s ease;
+}
+.nav-links li:hover{
+  transform: scale(1.05);
+}
+
+/* 4. Link styles */
+.navbar .nav-links a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+/* 5. Hover effect */
+.navbar .nav-links a:hover {
+  color: #FFFFFF;
+  background-color: #3B82F6;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* 6. Active/current link */
+.navbar .nav-links a.active {
+  background-color: #1E40AF;
+  color: #FFD700;
+  font-weight: 700;
+}
+
+/* 7. Special Styling for the "Play" button */
+.navbar .nav-links .play-button {
+  background-color: #F59E0B;
+  color: #1E40AF;
+  font-weight: 800;
+  padding: 8px 18px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.navbar .nav-links .play-button:hover {
+  background-color: #FFD700;
+  transform: scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+/* ENTER BTN */
+.enter{
+  display: flex;
+  justify-content: center;
+  margin: 4em;
+  font-size: xx-large;
+}
+.container{
+  display: flex;
+  gap: 0.1em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.text-box {
+  /* background: rgba(0, 0, 0, 0.5); */
+  padding: 20px 40px;
+  border-radius: 12px;
+  color: #fff;
+  text-align: center;
+  max-width: 600px;
+  margin: 40px auto;
+}
+.welcome {
+  font-family: 'Epunda Slab', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 60px;
+  color: #FFFFFF; 
+  text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000,
+    3px 3px 0 #FFD700,
+    -3px -3px 0 #8A2BE2; 
+
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.btn{
+  font-size: larger;
+  width: 50%;
+  letter-spacing: 0.1em;
+  padding: 0.35em;
+  background: linear-gradient(135deg, #60A5FA, #2563EB);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif; /* Futuristic + quest-like */
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+.btn:hover{
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #3B82F6, #1E40AF);
+}
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ======================================= */
+/*             RULES SECTION STYLING           */
+/* ======================================= */
+
+#rules {
+    padding: 60px 20px;
+    border-radius: 15px;
+    max-width: 700px;
+    margin: 40px auto;
+    transform: perspective(1000px) rotateX(0deg);
+    transition: all 0.6s ease-out;
+}
+
+/* Optional: Add a subtle 3D tilt on hover/focus if desired */
+#rules:hover {
+    transform: perspective(1000px) rotateX(1deg);
+}
+
+
+/* Styling for the Rules Heading */
+.text-box2 {
+    font-family: 'Orbitron', sans-serif; /* Use the futuristic font */
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #2563EB;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    border-bottom: 3px solid #FFD700; /* Gold underline for emphasis */
+    display: inline-block; /* To make the border-bottom fit the text width */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the Rules List */
+#rules ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0 0 40px 0;
+}
+
+/* Styling for each Rule Item */
+#rules ul li {
+    background-color: #F0F4F8; /* Light, subtle background for each rule */
+    border-left: 5px solid #F59E0B; /* Striking gold vertical line */
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    font-size: 1.15rem;
+    color: #1F2937; /* Dark text for readability */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* For aligning icon/number if used */
+    align-items: center;
+}
+
+#rules ul li:hover {
+    transform: translateX(5px); /* Slight movement on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling the Rule Number/Bullet point (using CSS counter/pseudo-element) */
+#rules ul li::before {
+    content: attr(data-rule-number); /* Use content from HTML data attribute if present */
+    /* Since the number is in the HTML, we'll style the number/text directly */
+    font-weight: 700;
+    color: #2563EB; /* Blue color for rule number */
+    margin-right: 15px;
+    font-size: 1.3rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Specific styling for the Call-to-Action button (reusing .btn) */
+#rules .btn {
+    /* Overrides for centering/sizing the button within the rules box */
+    width: 80%; /* Wider button inside the smaller rules box */
+    margin: 0 auto;
+    display: block; /* Important to center block-level element with margin: auto */
+}
+
+/* ==============MEDIA QUERRY============= */
+/* Add media query adjustments for the rules section */
+@media (max-width: 768px) {
+    #rules {
+        max-width: 95%; /* Make it wider on smaller screens */
+        padding: 40px 15px;
+    }
+    .text-box2 {
+        font-size: 2rem;
+    }
+    #rules ul li {
+        font-size: 1rem;
+    }
+}
+
+/* ==============MEDIA QUERRY============= */
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .navbar .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
